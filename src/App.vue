@@ -5,9 +5,36 @@
     <router-link :to="{name:'about'}">About</router-link>
     <router-link :to="{name:'jobs'}">Jobs</router-link>
   </nav>
+
+  <button @click="redirect">Redirect</button>
+  <button @click="back">Go Back</button>
+  <button @click="forward">Go Forward</button>
+
   <router-view/>
+
   </div>
 </template>
+
+<script>
+export default{
+  data(){
+    return{
+
+    }
+  },
+  methods:{
+    redirect(){
+      this.$router.push({name:'home'});
+    },
+    back(){
+      this.$router.go(-1);
+    },
+    forward(){
+      this.$router.go(1);
+    }, 
+  }
+}
+</script>
 
 <style>
 #app {
