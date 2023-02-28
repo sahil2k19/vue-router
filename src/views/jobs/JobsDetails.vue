@@ -1,8 +1,13 @@
 <template>
   <div>
 
-    <h1>Jobs Details Page</h1>
+    <div v-if="job">
+      <h1>{{job.title}}</h1>
     <p>{{ id }}</p>
+    </div>
+  <div v-else>
+    <h2>Loading...</h2>
+  </div>
   </div>
   
 </template>
@@ -12,9 +17,15 @@ export default {
   props:['id'], // jobs.vue send params as props to us for that we need to make it true in router/index.js
   data(){
     return {
-      // id: this.$route.params.id,
+      job:null,
     }
-  }
+  },
+  mounted(){
+        fetch('http://localhost:3000/jobs/'+this.id)
+        .then(res=>res.json())
+        .then(data=>this.job = data)
+        .catch(err=>console.log(err.message));
+    }
 }
 </script>
 
